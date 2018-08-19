@@ -4,16 +4,17 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="MemeSounds.ViewModels.LoginPage"
   BindingContext="{Binding Main, Source={StaticResource Locator}}"
-  Title="Login">
+  Title="Sound Board">
   <ContentPage.Content>
     <StackLayout
+        BindingContext="{Binding Login}"
         Padding="10,20,10,5">
         
         <Label
           FontAttributes="Bold"
           FontSize="Large"
           HorizontalOptions="Center"
-          Text="Sound Board">
+          Text="Please Login :)">
         </Label>
 
         <StackLayout
@@ -27,7 +28,9 @@
 
           <Entry
             Keyboard="Email"
-            Placeholder="Enter your email...">
+            Placeholder="Enter your email..."
+            Text="{Binding Email, Mode=TwoWay}">
+            
           </Entry>
 
           <Label
@@ -38,7 +41,8 @@
 
           <Entry           
             IsPassword="true"
-            Placeholder="Enter your password...">
+            Placeholder="Enter your password..."
+            Text="{Binding Password, Mode=TwoWay}">
           </Entry>
         </StackLayout>
         
@@ -48,17 +52,20 @@
             FontSize="Medium"
             Margin="30,0"
             HorizontalOptions="StartAndExpand"
-            Text="Rememberme in this device"
+            Text="Remember me on this device"
             VerticalOptions="Center">
           </Label>
           
           <Switch
             Margin="0,0,10,0"
-            HorizontalOptions="End">
+            HorizontalOptions="End"
+            IsToggled="{Binding IsRemembered, Mode=TwoWay}">
           </Switch>
         </StackLayout>
         
-        <ActivityIndicator>
+        <ActivityIndicator
+          IsRunning="{Binding IsRuning, Mode=TwoWay}"
+          VerticalOptions="CenterAndExpand">
         </ActivityIndicator>
 
         <StackLayout
@@ -70,14 +77,18 @@
             BackgroundColor="MediumBlue"
             HeightRequest="46"
             Text="Login"
-            TextColor="White">
+            TextColor="White"
+            IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+            Command="{Binding LoginCommand}">
           </Button>
 
           <Button
             BackgroundColor="DarkCyan"
             HeightRequest="46"
             Text="Register"
-            TextColor="White">
+            TextColor="White"
+            IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+            Command="{Binding RegisterCommand}">
           </Button>
         </StackLayout>
 

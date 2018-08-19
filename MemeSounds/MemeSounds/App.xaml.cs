@@ -1,7 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using MemeSounds.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using MemeSounds.Views;
-using MemeSounds.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MemeSounds
