@@ -4,13 +4,30 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="MemeSounds.Views.HomePage">
   <ContentPage.Content>
+    
     <StackLayout
       Padding="10">
-      <Label
+      
+      <Label 
+        FontAttributes="Bold"
         FontSize="Large"
-        Text="Meme Sounds!"
-        VerticalOptions="CenterAndExpand"
-        HorizontalOptions="CenterAndExpand" />
+        HorizontalOptions="CenterAndExpand" 
+        Text="Meme Sounds HomePage"/>
+
+      <Grid
+        x:Name="buttonsGrid"
+        Margin="5"
+        VerticalOptions="CenterAndExpand">
+        
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+      </Grid>  
+
+
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>

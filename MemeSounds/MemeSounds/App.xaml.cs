@@ -1,6 +1,7 @@
-﻿using MemeSounds.Views;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MemeSounds.Views;
+using MemeSounds.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MemeSounds
@@ -11,7 +12,7 @@ namespace MemeSounds
     {
       InitializeComponent();
 
-      MainPage = new HomePage();
+      this.MainPage = new NavigationPage(new LoginPage()) ;
     }
 
     protected override void OnStart()
