@@ -1,4 +1,4 @@
-﻿namespace Lands.Models
+﻿namespace MemeSounds.Models
 {
   using Newtonsoft.Json;
 

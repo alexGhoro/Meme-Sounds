@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Lands.Models
+namespace MemeSounds.Models
 {
   public class Translations
   {
