@@ -1,13 +1,17 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MemeSounds.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MemeSounds.ViewModels
 {
   public class LoginViewModel : BaseViewModel
-  {
-    #region Properties
-    public string Email { get; set; }
+  {    
+    public string Email
+    {
+      get { return this.email; }
+      set { SetValue(ref this.email, value); }
+    }
 
     public string Password
     {
@@ -28,7 +32,14 @@ namespace MemeSounds.ViewModels
       get { return this.isEnabled; }
       set { SetValue(ref this.isEnabled, value); }
     }
-    #endregion
+
+    public ICommand LoginCommand
+    {
+      get
+      {
+        return new RelayCommand(Login);
+      }
+    }
 
     private string email;
     private string password;
@@ -39,14 +50,11 @@ namespace MemeSounds.ViewModels
     {
       IsRemembered = true;
       IsEnabled = true;
+      this.Email = "amatute.dev@gmail.com";
+      this.Password = "123";
     }
 
-    public ICommand LoginCommand
-    { get
-      {
-        return new RelayCommand(Login);
-      }
-    }
+    public ICommand RegisterCommand { get; set; }
 
     private async void Login()
     {
@@ -62,6 +70,9 @@ namespace MemeSounds.ViewModels
         return;
       }
 
+      this.IsRunning = true;
+      this.IsEnabled = false;
+
       if (this.Email != "amatute.dev@gmail.com" || this.Password != "123" )
       {
         await Application.Current.MainPage.DisplayAlert("Error", "Email or Password incorrect.", "Accept");
@@ -69,13 +80,15 @@ namespace MemeSounds.ViewModels
         return;
       }
 
-      await Application.Current.MainPage.DisplayAlert("Ok", "You are now logged in!", "Accept");
+      this.IsRunning = false;
+      this.IsEnabled = true;
 
-      return;
+      this.Email = string.Empty;
+      this.Password = string.Empty;
+
+      MainViewModel.GetInstance().Lands = new LandsViewModel();
+      await Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
 
     }
-
-    public ICommand RegisterCommand { get; set; }
-
   }
 }
