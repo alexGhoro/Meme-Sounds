@@ -13,7 +13,6 @@ namespace MemeSounds.ViewModels
   public class LandsViewModel : BaseViewModel
   {
     private ObservableCollection<LandItemViewModel> lands;
-    private List<Land> landsList;
     private bool isRefreshing;
     private ApiService apiService;
     private string filter;
@@ -68,14 +67,14 @@ namespace MemeSounds.ViewModels
         return;
       }
 
-      landsList = (List<Land>)response.Result;
+      MainViewModel.GetInstance().LandsList = (List<Land>)response.Result;
       Lands = new ObservableCollection<LandItemViewModel>(ToLandItemViewModel());
       IsRefreshing = false;
     }
 
     private IEnumerable<LandItemViewModel> ToLandItemViewModel()
     {
-      return landsList.Select(l => new LandItemViewModel
+      return MainViewModel.GetInstance().LandsList.Select(l => new LandItemViewModel
       {
         Alpha2Code = l.Alpha2Code,
         Alpha3Code = l.Alpha3Code,
@@ -119,21 +118,9 @@ namespace MemeSounds.ViewModels
       }
     }
 
-    public ICommand ResfreshCommand
-    {
-      get
-      {
-        return new RelayCommand(LoadLands);
-      }
-    }
+    public ICommand ResfreshCommand => new RelayCommand(LoadLands);
 
-    public ICommand SearchCommand
-    {
-      get
-      {
-        return new RelayCommand(Search);
-      }
-    }
+    public ICommand SearchCommand => new RelayCommand(Search);
 
   }
 }

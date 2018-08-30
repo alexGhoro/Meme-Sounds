@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MemeSounds.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,6 +10,8 @@ namespace MemeSounds.ViewModels
     public LoginViewModel Login { get; set; }
     public LandsViewModel Lands { get; set; }
     public LandViewModel Land { get; set; }
+
+    public List<Land> LandsList { get; set; }
 
     public MainViewModel()
     {

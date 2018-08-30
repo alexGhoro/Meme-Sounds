@@ -9,6 +9,7 @@
   <ContentPage.Content>
     <StackLayout
       BindingContext="{Binding Lands}">
+      
       <SearchBar
         BackgroundColor="Silver"
         HeightRequest="46"
@@ -16,6 +17,7 @@
         Placeholder="Search..."
         SearchCommand="{Binding SearchCommand}">
       </SearchBar>
+      
       <ListView 
         BackgroundColor="Silver"
         HasUnevenRows="true" 
