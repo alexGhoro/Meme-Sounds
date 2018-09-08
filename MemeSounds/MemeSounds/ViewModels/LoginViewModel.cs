@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MemeSounds.Services;
 using MemeSounds.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -6,7 +7,9 @@ using Xamarin.Forms;
 namespace MemeSounds.ViewModels
 {
   public class LoginViewModel : BaseViewModel
-  {    
+  {
+    private ApiService apiService;
+
     public string Email
     {
       get { return this.email; }
@@ -73,10 +76,23 @@ namespace MemeSounds.ViewModels
       this.IsRunning = true;
       this.IsEnabled = false;
 
-      if (this.Email != "amatute.dev@gmail.com" || this.Password != "123" )
+      var internetConnection = await apiService.CheckConnection();
+
+      if (!internetConnection.IsSuccess)
       {
-        await Application.Current.MainPage.DisplayAlert("Error", "Email or Password incorrect.", "Accept");
-        this.Password = string.Empty;
+        this.IsRunning = false;
+        this.IsEnabled = true;
+        await Application.Current.MainPage.DisplayAlert("Error", internetConnection.Message, "Accept");
+        return;
+      }
+
+      var token = await apiService.GetToken("http://memesoundsapi.azurewebsites.net", this.Email, this.Password);
+
+      if (token == null)
+      {
+        this.IsRunning = false;
+        this.IsEnabled = true;
+        await Application.Current.MainPage.DisplayAlert("Error","Something went wrong :(", "Accept");
         return;
       }
 

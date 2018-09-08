@@ -1,11 +1,15 @@
 ﻿using MemeSounds.API.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace MemeSounds.API
 {
@@ -24,6 +28,31 @@ namespace MemeSounds.API
 
       var DbConnectionString = BuildDBConnectionString();
       services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(DbConnectionString));
+
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
+      services.AddAuthentication(options =>
+      {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+      })
+      .AddJwtBearer(options =>
+      {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+          ValidateIssuer = true,
+          ValidateAudience = true,
+          ValidAudience = "http://oec.com",
+          ValidIssuer = "http://oec.com",
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecureKey"))
+        };
+      });
+
     }
 
     private string BuildDBConnectionString()
@@ -45,6 +74,8 @@ namespace MemeSounds.API
       {
         app.UseHsts();
       }
+
+      app.UseAuthentication();
 
       app.UseHttpsRedirection();
       app.UseMvc();

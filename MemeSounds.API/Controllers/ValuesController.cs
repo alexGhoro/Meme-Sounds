@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MemeSounds.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemeSounds.API.Controllers
 {
+  [Authorize]
   [Route("api/[controller]")]
   [ApiController]
   public class ValuesController : ControllerBase
   {
+    private ApplicationDbContext _context;
+
+    public ValuesController(ApplicationDbContext context)
+    {
+      _context = context;
+    }
     // GET api/values
     [HttpGet]
     public ActionResult<IEnumerable<string>> Get()
     {
-      return new string[] { "value1", "value2" };
+      return _context.Users.Select(u => u.UserName).ToArray();
+      //return new string[] { "value1", "value2" };
     }
 
     // GET api/values/5
