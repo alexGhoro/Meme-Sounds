@@ -14,7 +14,7 @@
           FontAttributes="Bold"
           FontSize="Large"
           HorizontalOptions="Center"
-          Text="Please Login :)">
+          Text="Please Login.">
         </Label>
 
         <StackLayout
@@ -64,7 +64,7 @@
         </StackLayout>
         
         <ActivityIndicator
-          IsRunning="{Binding IsRuning, Mode=TwoWay}"
+          IsRunning="{Binding IsRunning, Mode=TwoWay}"
           VerticalOptions="CenterAndExpand">
         </ActivityIndicator>
 

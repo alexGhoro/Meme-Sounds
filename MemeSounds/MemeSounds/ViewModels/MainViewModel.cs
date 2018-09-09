@@ -12,6 +12,7 @@ namespace MemeSounds.ViewModels
     public LandViewModel Land { get; set; }
 
     public List<Land> LandsList { get; set; }
+    public TokenResponse Token { get; internal set; }
 
     public MainViewModel()
     {

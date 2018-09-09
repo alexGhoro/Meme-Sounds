@@ -23,15 +23,15 @@
         };
       }
 
-      var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
-      if (!isReachable)
-      {
-        return new Response
-        {
-          IsSuccess = false,
-          Message = "Check you internet connection.",
-        };
-      }
+      //var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+      //if (!isReachable)
+      //{
+      //  return new Response
+      //  {
+      //    IsSuccess = false,
+      //    Message = "Check you internet connection.",
+      //  };
+      //}
 
       return new Response
       {
@@ -49,15 +49,15 @@
           BaseAddress = new Uri(urlBase)
         };
 
-        var response = await client.PostAsync (
-          "Token",
+        var response = await client.PostAsync ("api/auth/token",
           new StringContent(string.Format("grant_type=password&username={0}&password={1}", username, password),
-                            Encoding.UTF8,
-                            "application/x-www-form-urlencoded"));
+          Encoding.UTF8,
+          "application/x-www-form-urlencoded"));
 
-        var resultJSON = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<TokenResponse>(resultJSON);
-        return result;
+        var apiTokenResponse = await response.Content.ReadAsStringAsync();
+
+        return JsonConvert.DeserializeObject<TokenResponse>(apiTokenResponse);
+
       }
       catch
       {

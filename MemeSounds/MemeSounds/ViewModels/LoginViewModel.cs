@@ -9,6 +9,10 @@ namespace MemeSounds.ViewModels
   public class LoginViewModel : BaseViewModel
   {
     private ApiService apiService;
+    private string email;
+    private string password;
+    private bool isRunning;
+    private bool isEnabled;
 
     public string Email
     {
@@ -44,17 +48,14 @@ namespace MemeSounds.ViewModels
       }
     }
 
-    private string email;
-    private string password;
-    private bool isRunning;
-    private bool isEnabled;
 
     public LoginViewModel()
     {
+      apiService = new ApiService();
       IsRemembered = true;
       IsEnabled = true;
       this.Email = "amatute.dev@gmail.com";
-      this.Password = "123";
+      this.Password = ".kappa1xD";
     }
 
     public ICommand RegisterCommand { get; set; }
@@ -86,24 +87,35 @@ namespace MemeSounds.ViewModels
         return;
       }
 
-      var token = await apiService.GetToken("http://memesoundsapi.azurewebsites.net", this.Email, this.Password);
+      var token = await apiService.GetToken("https://memesoundsapi.azurewebsites.net", Email, Password);
 
       if (token == null)
       {
-        this.IsRunning = false;
-        this.IsEnabled = true;
-        await Application.Current.MainPage.DisplayAlert("Error","Something went wrong :(", "Accept");
+        IsRunning = false;
+        IsEnabled = true;
+        await Application.Current.MainPage.DisplayAlert("Error","Something went wrong, try again later", "Accept");
         return;
       }
+
+      if (string.IsNullOrEmpty(token.AccessToken))
+      {
+        IsRunning = false;
+        IsEnabled = true;
+        await Application.Current.MainPage.DisplayAlert("Error", "Token is null or empty", "Accept");
+        this.Password = string.Empty;
+        return;
+      }
+
+      var mainViewModel = MainViewModel.GetInstance();
+      mainViewModel.Token = token;
+      mainViewModel.Lands = new LandsViewModel();
+      await Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
 
       this.IsRunning = false;
       this.IsEnabled = true;
 
       this.Email = string.Empty;
-      this.Password = string.Empty;
 
-      MainViewModel.GetInstance().Lands = new LandsViewModel();
-      await Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
 
     }
   }

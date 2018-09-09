@@ -51,9 +51,42 @@ namespace MemeSounds.API.Controllers
         });
       }
 
-      return Unauthorized();
+      return Unauthorized();      
+    }
 
-      
+    [HttpPost]
+    [Route("token")]
+    public async Task<IActionResult> Token([FromForm] LoginModel model)
+    {
+      var user = await userManager.FindByNameAsync(model.Username);
+      if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+      {
+        var claims = new[]
+        {
+          new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+          new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        };
+
+        var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecureKey"));
+
+        var token = new JwtSecurityToken(
+          issuer: "http://oec.com",
+          audience: "http://oec.com",
+          expires: DateTime.UtcNow.AddHours(1),
+          claims: claims,
+          signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
+        );
+
+        return Ok(new
+        {
+          access_token = new JwtSecurityTokenHandler().WriteToken(token),
+          userName = model.Username,
+          expiration = token.ValidTo,
+          issued = token.Issuer
+        });
+      }
+
+      return Unauthorized();
     }
 
   }
