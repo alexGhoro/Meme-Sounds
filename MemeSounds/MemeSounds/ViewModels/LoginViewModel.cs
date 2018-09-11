@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using MemeSounds.Helpers;
 using MemeSounds.Services;
 using MemeSounds.Views;
 using System.Windows.Input;
@@ -64,13 +65,13 @@ namespace MemeSounds.ViewModels
     {
       if (string.IsNullOrEmpty(this.Email))
       {
-        await Application.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
+        await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailValidation, Languages.Accept);
         return;
       }
 
       if (string.IsNullOrEmpty(this.Password))
       {
-        await Application.Current.MainPage.DisplayAlert("Error", "You must enter an password.", "Accept");
+        await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.EmailValidation, Languages.Accept);
         return;
       }
 
@@ -83,7 +84,7 @@ namespace MemeSounds.ViewModels
       {
         this.IsRunning = false;
         this.IsEnabled = true;
-        await Application.Current.MainPage.DisplayAlert("Error", internetConnection.Message, "Accept");
+        await Application.Current.MainPage.DisplayAlert(Languages.Error, internetConnection.Message, Languages.Accept);
         return;
       }
 
@@ -93,7 +94,7 @@ namespace MemeSounds.ViewModels
       {
         IsRunning = false;
         IsEnabled = true;
-        await Application.Current.MainPage.DisplayAlert("Error","Something went wrong, try again later", "Accept");
+        await Application.Current.MainPage.DisplayAlert(Languages.Error,"Something went wrong, try again later", Languages.Accept);
         return;
       }
 
@@ -101,7 +102,7 @@ namespace MemeSounds.ViewModels
       {
         IsRunning = false;
         IsEnabled = true;
-        await Application.Current.MainPage.DisplayAlert("Error", "Token is null or empty", "Accept");
+        await Application.Current.MainPage.DisplayAlert(Languages.Error, "Token is null or empty", Languages.Accept);
         this.Password = string.Empty;
         return;
       }

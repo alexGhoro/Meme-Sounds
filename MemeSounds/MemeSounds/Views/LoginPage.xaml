@@ -2,15 +2,21 @@
 <ContentPage 
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:i18n="clr-namespace:MemeSounds.Helpers"
   x:Class="MemeSounds.ViewModels.LoginPage"
   BindingContext="{Binding Main, Source={StaticResource Locator}}"
   Title="Sound Board">
   <ContentPage.Content>
     <StackLayout
-        BindingContext="{Binding Login}"
-        Padding="10,20,10,5">
-        
-        <Label
+      BindingContext="{Binding Login}"
+      Padding="10,20,10,5">
+
+      <Image
+        Source="onu"
+        WidthRequest="200">
+      </Image>
+
+      <Label
           FontAttributes="Bold"
           FontSize="Large"
           HorizontalOptions="Center"
@@ -28,7 +34,7 @@
 
           <Entry
             Keyboard="Email"
-            Placeholder="Enter your email..."
+            Placeholder="{i18n:Translate EmailPlaceHolder}"
             Text="{Binding Email, Mode=TwoWay}">
             
           </Entry>
