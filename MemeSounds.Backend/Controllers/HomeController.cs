@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MemeSounds.Backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using MemeSounds.Backend.Models;
+using System.Diagnostics;
 
 namespace MemeSounds.Backend.Controllers
 {

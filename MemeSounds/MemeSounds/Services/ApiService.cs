@@ -9,6 +9,7 @@
   using Newtonsoft.Json;
   using Plugin.Connectivity;
   using MemeSounds.Models;
+  using MemeSounds.Domain;
 
   public class ApiService
   {

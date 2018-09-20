@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MemeSounds.Models
+﻿namespace MemeSounds.Domain
 {
   public class Response
   {
