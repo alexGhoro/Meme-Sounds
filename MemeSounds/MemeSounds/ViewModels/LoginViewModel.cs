@@ -41,25 +41,19 @@ namespace MemeSounds.ViewModels
       set { SetValue(ref this.isEnabled, value); }
     }
 
-    public ICommand LoginCommand
-    {
-      get
-      {
-        return new RelayCommand(Login);
-      }
-    }
+    public ICommand LoginCommand => new RelayCommand(Login);
 
+    public ICommand RegisterCommand { get; set; }
 
     public LoginViewModel()
     {
       apiService = new ApiService();
       IsRemembered = true;
       IsEnabled = true;
-      this.Email = "amatute.dev@gmail.com";
+      this.Email = "almatute@outlook.com";
       this.Password = ".kappa1xD";
     }
 
-    public ICommand RegisterCommand { get; set; }
 
     private async void Login()
     {

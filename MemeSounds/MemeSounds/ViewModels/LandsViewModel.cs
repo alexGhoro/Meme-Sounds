@@ -17,6 +17,10 @@ namespace MemeSounds.ViewModels
     private ApiService apiService;
     private string filter;
 
+    public ICommand RefreshCommand => new RelayCommand(LoadLands);
+
+    public ICommand SearchCommand => new RelayCommand(Search);
+
     public ObservableCollection<LandItemViewModel> Lands
     {
       get { return this.lands;}
@@ -118,9 +122,7 @@ namespace MemeSounds.ViewModels
       }
     }
 
-    public ICommand ResfreshCommand => new RelayCommand(LoadLands);
-
-    public ICommand SearchCommand => new RelayCommand(Search);
+   
 
   }
 }

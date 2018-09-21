@@ -106,7 +106,7 @@ namespace MemeSounds.Backend.Helpers
       
     }
 
-    public static async Task PasswordRecovery(string email)
+    public static void PasswordRecovery(string email)
     {
       //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_dbContext));
       //var userASP = userManager.FindByEmail(email);

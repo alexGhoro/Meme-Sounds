@@ -3,7 +3,7 @@
   xmlns="http://xamarin.com/schemas/2014/forms"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:i18n="clr-namespace:MemeSounds.Helpers"
-  x:Class="MemeSounds.ViewModels.LoginPage"
+  x:Class="MemeSounds.Views.LoginPage"
   BindingContext="{Binding Main, Source={StaticResource Locator}}"
   Title="Sound Board">
   <ContentPage.Content>
@@ -12,8 +12,8 @@
       Padding="10,20,10,5">
 
       <Image
-        Source="onu"
-        WidthRequest="200">
+        Source="worldmap2"
+        HeightRequest="100">
       </Image>
 
       <Label
@@ -21,93 +21,92 @@
           FontSize="Large"
           HorizontalOptions="Center"
           Text="Please Login.">
-        </Label>
+      </Label>
 
-        <StackLayout
-          Margin="0,60"> 
-                  
-          <Label
+      <StackLayout
+          Margin="0,60">
+
+        <Label
             Text="E-Mail"
             FontSize="Large"
             Margin="0,15,0,0">
-          </Label>
+        </Label>
 
-          <Entry
+        <Entry
             Keyboard="Email"
-            Placeholder="{i18n:Translate EmailPlaceHolder}"
+            Placeholder="Enter your Email"
             Text="{Binding Email, Mode=TwoWay}">
-            
-          </Entry>
 
-          <Label
+        </Entry>
+
+        <Label
             FontSize="Large"
             Text="Password"
             Margin="0,20,0,0">
-          </Label>
+        </Label>
 
-          <Entry           
+        <Entry           
             IsPassword="true"
             Placeholder="Enter your password..."
             Text="{Binding Password, Mode=TwoWay}">
-          </Entry>
-        </StackLayout>
-        
-        <StackLayout
+        </Entry>
+      </StackLayout>
+
+      <StackLayout
           Orientation="Horizontal">
-          <Label
+        <Label
             FontSize="Medium"
             Margin="30,0"
             HorizontalOptions="StartAndExpand"
             Text="Remember me on this device"
             VerticalOptions="Center">
-          </Label>
-          
-          <Switch
+        </Label>
+
+        <Switch
             Margin="0,0,10,0"
             HorizontalOptions="End"
             IsToggled="{Binding IsRemembered, Mode=TwoWay}">
-          </Switch>
-        </StackLayout>
-        
-        <ActivityIndicator
+        </Switch>
+      </StackLayout>
+
+      <ActivityIndicator
           IsRunning="{Binding IsRunning, Mode=TwoWay}"
           VerticalOptions="CenterAndExpand">
-        </ActivityIndicator>
+      </ActivityIndicator>
 
-        <StackLayout
+      <StackLayout
           Margin="40,0"
           Orientation="Horizontal"
           HorizontalOptions="CenterAndExpand">
 
-          <Button
+        <Button
             BackgroundColor="MediumBlue"
             HeightRequest="46"
             Text="Login"
             TextColor="White"
             IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
             Command="{Binding LoginCommand}">
-          </Button>
+        </Button>
 
-          <Button
+        <Button
             BackgroundColor="DarkCyan"
             HeightRequest="46"
             Text="Register"
             TextColor="White"
             IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
             Command="{Binding RegisterCommand}">
-          </Button>
-        </StackLayout>
+        </Button>
+      </StackLayout>
 
-        <Label
+      <Label
           Margin="0,20"
           FontSize="Small"
           TextColor="Blue"
           HorizontalOptions="Center"
           Text="Forgot your Password?">
-        </Label>
+      </Label>
 
-      </StackLayout>
+    </StackLayout>
   </ContentPage.Content>
-</ContentPage>
-  
+</ContentPage> 
   

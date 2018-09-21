@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MemeSounds.ViewModels
+namespace MemeSounds.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginPage : ContentPage
 	{
 		public LoginPage ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }

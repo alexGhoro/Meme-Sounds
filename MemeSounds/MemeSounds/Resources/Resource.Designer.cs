@@ -70,15 +70,6 @@ namespace MemeSounds.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your email.
-        /// </summary>
-        public static string EmailPlaceHolder {
-            get {
-                return ResourceManager.GetString("EmailPlaceHolder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You must enter an email..
         /// </summary>
         public static string EmailValidation {

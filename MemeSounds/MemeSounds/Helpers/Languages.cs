@@ -11,9 +11,9 @@ namespace MemeSounds.Helpers
   {
     static Languages()
     {
-      var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-      Resource.Culture = ci;
-      DependencyService.Get<ILocalize>().SetLocale(ci);
+      var cultureInfo = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+      Resource.Culture = cultureInfo;
+      DependencyService.Get<ILocalize>().SetLocale(cultureInfo);
     }
 
     public static string Accept => Resource.Accept;
