@@ -12,7 +12,7 @@
 
   public class ApiService
   {
-    public async Task<Response> CheckConnection()
+    public Response CheckConnection()
     {
       if (!CrossConnectivity.Current.IsConnected)
       {

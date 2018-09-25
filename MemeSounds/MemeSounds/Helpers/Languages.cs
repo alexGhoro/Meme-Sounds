@@ -21,5 +21,11 @@ namespace MemeSounds.Helpers
     public static string EmailValidation => Resource.EmailValidation;
 
     public static string Error => Resource.Error;
+
+    public static string MyProfile => Resource.MyProfile;
+
+    public static string Stats => Resource.Stats;
+
+    public static string LogOut => Resource.LogOut;
   }
 }

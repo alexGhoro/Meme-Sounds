@@ -52,7 +52,7 @@ namespace MemeSounds.ViewModels
     private async void LoadLands()
     {
       IsRefreshing = true;
-      var connection = await apiService.CheckConnection();
+      var connection = apiService.CheckConnection();
       if (!connection.IsSuccess)
       {
         IsRefreshing = false;

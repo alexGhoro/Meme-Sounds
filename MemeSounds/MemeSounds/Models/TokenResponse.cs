@@ -17,8 +17,8 @@
     [JsonProperty(PropertyName = "issued")]
     public string Issued { get; set; }
 
-    //[JsonProperty(PropertyName = "token_type")]
-    //public string TokenType { get; set; }
+    [JsonProperty(PropertyName = "tokenType")]
+    public string TokenType { get; set; }
 
     //[JsonProperty(PropertyName = "expires_in")]
     //public int ExpiresIn { get; set; }

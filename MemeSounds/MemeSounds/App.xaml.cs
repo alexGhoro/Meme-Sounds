@@ -1,4 +1,5 @@
-﻿using MemeSounds.ViewModels;
+﻿using MemeSounds.Helpers;
+using MemeSounds.ViewModels;
 using MemeSounds.Views;
 using System;
 using Xamarin.Forms;
@@ -9,11 +10,24 @@ namespace MemeSounds
 {
   public partial class App : Application
   {
+    public static NavigationPage Navigator { get; internal set; }
+
     public App()
     {
       InitializeComponent();
 
-      MainPage = new NavigationPage(new LoginPage()); // FIXING VS NEW
+      if (string.IsNullOrEmpty(Settings.Token))
+      {
+        MainPage = new NavigationPage(new LoginPage());
+      }
+      else
+      {
+        var mainViewModel = MainViewModel.GetInstance();
+        mainViewModel.Token = Settings.Token;
+        mainViewModel.TokenType = Settings.TokenType;
+        mainViewModel.Lands = new LandsViewModel();
+        MainPage = new MasterPage();
+      }
     }
 
     protected override void OnStart()

@@ -50,10 +50,7 @@ namespace MemeSounds.ViewModels
       apiService = new ApiService();
       IsRemembered = true;
       IsEnabled = true;
-      this.Email = "almatute@outlook.com";
-      this.Password = ".kappa1xD";
     }
-
 
     private async void Login()
     {
@@ -72,7 +69,7 @@ namespace MemeSounds.ViewModels
       this.IsRunning = true;
       this.IsEnabled = false;
 
-      var internetConnection = await apiService.CheckConnection();
+      var internetConnection = apiService.CheckConnection();
 
       if (!internetConnection.IsSuccess)
       {
@@ -102,9 +99,17 @@ namespace MemeSounds.ViewModels
       }
 
       var mainViewModel = MainViewModel.GetInstance();
-      mainViewModel.Token = token;
+      mainViewModel.Token = token.AccessToken;
+      mainViewModel.TokenType = token.TokenType;
+
+      if (this.IsRemembered)
+      {
+        Settings.Token = token.AccessToken;
+        Settings.TokenType = token.TokenType;
+      }
+
       mainViewModel.Lands = new LandsViewModel();
-      await Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
+      Application.Current.MainPage = new MasterPage();
 
       this.IsRunning = false;
       this.IsEnabled = true;

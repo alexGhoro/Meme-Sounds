@@ -82,7 +82,8 @@ namespace MemeSounds.API.Controllers
           access_token = new JwtSecurityTokenHandler().WriteToken(token),
           userName = model.Username,
           expiration = token.ValidTo,
-          issued = token.Issuer
+          issued = token.Issuer,
+          tokenType = token.Header.Typ
         });
       }
 

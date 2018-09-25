@@ -126,4 +126,13 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Cerrar Sesion</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Mi Perfil</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Estadisticas</value>
+  </data>
 </root>
