@@ -13,6 +13,7 @@ namespace MemeSounds.Backend.Helpers
   {
     private readonly ApplicationDbContext _dbContext;
     private UserManager<IdentityUser> _userManager;
+    private RoleManager<IdentityRole> _roleManager;
 
     public UsersHelper(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
     {
@@ -49,14 +50,12 @@ namespace MemeSounds.Backend.Helpers
       return false;
     }
 
-    public static void CheckRole(string roleName)
+    public static async Task CheckRoleAsync(string roleName)
     {
-      //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_dbContext));
-
-      //// Check to see if Role Exists, if not create it
-      //if (!roleManager.RoleExists(roleName))
+      //var role = await _roleManager.FindByNameAsync(roleName);
+      //if (string.IsNullOrEmpty(role.Name))
       //{
-      //  roleManager.Create(new IdentityRole(roleName));
+      //  await _roleManager.CreateAsync(new IdentityRole(roleName));
       //}
     }
 
@@ -90,7 +89,7 @@ namespace MemeSounds.Backend.Helpers
       //userManager.AddToRole(userASP.Id, roleName);
     }
 
-    public void CreateUserASP(string email, string password, string roleName)
+    public async Task CreateUserASPAsync(string email, string password, string roleName)
     {
       var userASP = new IdentityUser
       {
@@ -99,11 +98,11 @@ namespace MemeSounds.Backend.Helpers
       };
 
       var result = _userManager.CreateAsync(userASP, password);
-      if (result.IsCompletedSuccessfully)
+      if (result.Result.Succeeded)
       {
-        _userManager.AddToRoleAsync(userASP, roleName);
+        await _userManager.AddToRoleAsync(userASP, roleName);
       }
-      
+
     }
 
     public static void PasswordRecovery(string email)

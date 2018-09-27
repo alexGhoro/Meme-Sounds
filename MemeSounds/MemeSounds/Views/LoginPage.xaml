@@ -9,7 +9,7 @@
   <ContentPage.Content>
     <StackLayout
       BindingContext="{Binding Login}"
-      Padding="10,20,10,5">
+      Padding="5">
 
       <Image
         Source="worldmap2"

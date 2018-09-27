@@ -5,6 +5,7 @@
   x:Class="MemeSounds.Views.MenuPage"
   BindingContext="{Binding Main, Source={StaticResource Locator}}"
   BackgroundColor="RoyalBlue"
+  Icon="ic_action_menu"
   Title="Menu Page">
   <ContentPage.Content>
     <StackLayout

@@ -63,7 +63,7 @@ namespace MemeSounds.Backend.Controllers
 
         //Crear el usuario ASP here
         var userHelper = new UsersHelper(_context, _userManager);
-        userHelper.CreateUserASP(userView.Email, userView.Password, "User");
+        await userHelper.CreateUserASPAsync(user.Email, userView.Password, "User");
 
         return RedirectToAction(nameof(Index));
       }

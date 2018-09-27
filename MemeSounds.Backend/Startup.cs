@@ -1,4 +1,5 @@
 ﻿using MemeSounds.Backend.Data;
+using MemeSounds.Backend.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace MemeSounds.Backend
 {
@@ -31,11 +34,16 @@ namespace MemeSounds.Backend
       var DbConnectionString = BuildDBConnectionString();
       services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(DbConnectionString));
 
+      services.Configure<SystemSettings>(Configuration.GetSection("SystemSettings"));
+
       services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultUI();
 
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+      services.AddOptions();
+
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -57,12 +65,23 @@ namespace MemeSounds.Backend
 
       app.UseAuthentication();
 
+      SeedDataBase(app);
+
       app.UseMvc(routes =>
       {
         routes.MapRoute(
           name: "default",
           template: "{controller=Home}/{action=Index}/{id?}");
       });
+    }
+
+    private void SeedDataBase(IApplicationBuilder app)
+    {
+      SeedDatabase.SeedRoles(app.ApplicationServices).Wait();
+      SeedDatabase.SeedSystemAdminUser(app.ApplicationServices,
+        Configuration["AdminUser"],
+        Configuration["AdminPassword"])
+        .Wait();
     }
 
     private string BuildDBConnectionString()
