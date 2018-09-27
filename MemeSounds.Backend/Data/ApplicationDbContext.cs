@@ -12,6 +12,7 @@ namespace MemeSounds.Backend.Data
     {
     }
     public DbSet<User> User { get; set; }
+    public DbSet<MemeSounds.Domain.UserType> UserType { get; set; }
   }
 }
 

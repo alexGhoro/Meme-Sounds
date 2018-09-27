@@ -2,6 +2,7 @@
 using MemeSounds.Backend.Helpers;
 using MemeSounds.Backend.Models;
 using MemeSounds.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MemeSounds.Backend.Controllers
 {
+  [Authorize(Roles = "SystemAdmin")]
   public class UsersController : Controller
   {
     private readonly ApplicationDbContext _context;
